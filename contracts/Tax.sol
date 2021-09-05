@@ -955,7 +955,7 @@ contract Tax is ERC20, Ownable {
         uint32 _feePercentage
     ) public pure returns (uint256 taxed) {
         taxed = _amount.mul(_feePercentage).div(
-            10**(uint256(_feeDecimals)+2)
+            10**(uint256(_feeDecimals))
         );
     }
 

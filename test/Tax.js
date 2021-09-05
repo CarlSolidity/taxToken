@@ -18,10 +18,6 @@ describe('Tax', function() {
     });
 
     describe("Deployment", function() {
-        it("Deploy and check fee parameters", async function () {
-            expect(await tax.feeDecimals.to.equal(2));
-        });
-
         it("Should assign the total supply of tokens to the owner", async function () {
             const ownerBalance = await tax.balanceOf(owner.address);
             expect(await tax.totalSupply()).to.equal(ownerBalance);
@@ -31,7 +27,8 @@ describe('Tax', function() {
     describe("Send tokens and check tax collection", function() {
         it("Send 100 tokens to addr1 after making addr2 tax collector", async function () {
             await tax.updateTaxCollector(addr2.address);
-            await tax.transferFrom(owner.address, addr1.address, 100);
+            await tax.approve(addr1.address, 1000);
+            await tax.connect(addr1).transferFrom(owner.address, addr1.address, 3 * 10**18);
         })
     })
 });
