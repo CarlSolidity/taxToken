@@ -5,18 +5,23 @@ const { expect } = require ('chai');
 describe('NFT', function() {
     beforeEach(async function() {
         NFT = await ethers.getContractFactory("NFT");
+        let balance;
+        let total;
         [own, add1, add2, ...addrs] = await ethers.getSigners();
         nft = await NFT.deploy();
         await nft.deployed;
     });
 
     describe("Deployment", function() {
-        it("Mint NFT", async function () {
+        it("Only 1 token", async function () {
             await nft.createRing();
             total = nft.totalSupply();
-            expect(await nft.totalSupply()).to.equal(nft.balanceOf(own.address))
-
-        })
+            expect(await total).to.equal(1);
+        });
+        it("Only one token in balance", async function () {
+            await nft.createRing();
+            expect(await nft.balanceOf(own.address)).to.equal(1);
+        });
     })
 })
 
