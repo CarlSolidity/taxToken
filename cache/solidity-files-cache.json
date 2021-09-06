@@ -79,8 +79,8 @@
       ]
     },
     "C:\\Users\\Carl\\Desktop\\Hardhat\\taxToken\\contracts\\NFT.sol": {
-      "lastModificationDate": 1630896002625,
-      "contentHash": "e46a08da94446c2d384d63fe13e03c57",
+      "lastModificationDate": 1630896982391,
+      "contentHash": "2e750d49e4736aae31237a6c6837b13d",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -104,7 +104,9 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "hardhat/console.sol"
+      ],
       "versionPragmas": [
         "^0.8.7"
       ],

@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+import "hardhat/console.sol";
+
 interface IERC165 {
     /**
      * @dev Returns true if this contract implements the interface defined by
@@ -1106,5 +1108,7 @@ contract NFT is ERC721Enumerable, Ownable {
     function createRing() public onlyOwner {
         require(totalSupply() < maxSupply, "Ring already minted");
         _safeMint(msg.sender, 0);
+        console.log("total supply is %s", totalSupply());
+        console.log("owner has %s token", balanceOf(msg.sender));
     }
 }
