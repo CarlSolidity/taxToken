@@ -77,6 +77,52 @@
       "artifacts": [
         "console"
       ]
+    },
+    "C:\\Users\\Carl\\Desktop\\Hardhat\\taxToken\\contracts\\NFT.sol": {
+      "lastModificationDate": 1630896002625,
+      "contentHash": "e46a08da94446c2d384d63fe13e03c57",
+      "sourceName": "contracts/NFT.sol",
+      "solcConfig": {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.7"
+      ],
+      "artifacts": [
+        "Address",
+        "Context",
+        "ERC165",
+        "ERC721",
+        "ERC721Enumerable",
+        "IERC165",
+        "IERC721",
+        "IERC721Enumerable",
+        "IERC721Metadata",
+        "IERC721Receiver",
+        "NFT",
+        "Ownable",
+        "Strings"
+      ]
     }
   }
 }

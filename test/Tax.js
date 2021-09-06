@@ -2,6 +2,20 @@ const { expect } = require ('chai');
 //const { ethers } = require('ethers');
 //const { isCallTrace } = require('hardhat/internal/hardhat-network/stack-traces/message-trace');
 
+describe('NFT', function() {
+    beforeEach(async function() {
+        NFT = await ethers.getContractFactory("NFT");
+        nft = await NFT.deploy();
+        await nft.deployed;
+    });
+
+    describe("Deployment", function() {
+        it("Token is deployed", async function () {
+            
+        })
+    })
+})
+
 describe('Tax', function() {
     // Deploy the contract
     let owner;
