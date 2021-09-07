@@ -25,6 +25,7 @@ describe('NFT', function() {
     })
 })
 
+// To use the NFT contract in the token contract, modify the constructor to get the sc address of NFT as argument.
 describe('Tax', function() {
     // Deploy the contract
     let owner;
@@ -50,8 +51,11 @@ describe('Tax', function() {
     describe("Send tokens and check tax collection", function() {
         it("Send 100 tokens to addr1 after making addr2 tax collector", async function () {
             await tax.updateTaxCollector(addr2.address);
-            await tax.approve(addr1.address, 1000);
-            await tax.connect(addr1).transferFrom(owner.address, addr1.address, 3 * 10**18);
+            decim = 18;
+            exp = ethers.BigNumber.from("10").pow(decim);
+            amount = ethers.BigNumber.from("3").mul(exp);
+            await tax.approve(addr1.address, amount);
+            await tax.connect(addr1).transferFrom(owner.address, addr1.address, amount);
         })
     })
 });
