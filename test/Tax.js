@@ -2,6 +2,8 @@ const { expect } = require ('chai');
 //const { ethers } = require('ethers');
 //const { isCallTrace } = require('hardhat/internal/hardhat-network/stack-traces/message-trace');
 
+
+// To modify for new ruler contract
 describe('NFT', function() {
     beforeEach(async function() {
         NFT = await ethers.getContractFactory("NFT");

@@ -1098,12 +1098,12 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 }
 
-contract NFT is ERC721Enumerable, Ownable {
+abstract contract NFT is ERC721Enumerable, Ownable {
     uint256 public constant maxSupply = 1;
 
-    constructor() ERC721("OneRing", "ONE") {
+    /*constructor() ERC721("OneRing", "ONE") {
 
-    }
+    }*/
 
     function createRing() public onlyOwner {
         require(totalSupply() < maxSupply, "Ring already minted");
@@ -1111,4 +1111,16 @@ contract NFT is ERC721Enumerable, Ownable {
         console.log("total supply is %s", totalSupply());
         console.log("owner has %s token", balanceOf(msg.sender));
     }
+
+    /*
+    bool public init;
+
+    function setup() public override {
+        require(init==false, "Ring already created");
+
+        name = "OneRing";
+        symbol = "ONE";
+        ruler = msg.sender;
+    
+    }*/
 }
