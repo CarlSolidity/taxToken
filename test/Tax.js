@@ -1,31 +1,8 @@
 const { expect } = require ('chai');
+const { artifacts } = require('hardhat');
 //const { ethers } = require('ethers');
 //const { isCallTrace } = require('hardhat/internal/hardhat-network/stack-traces/message-trace');
 
-
-// To modify for new ruler contract
-describe('NFT', function() {
-    beforeEach(async function() {
-        NFT = await ethers.getContractFactory("NFT");
-        let balance;
-        let total;
-        [own, add1, add2, ...addrs] = await ethers.getSigners();
-        nft = await NFT.deploy();
-        await nft.deployed;
-    });
-
-    describe("Deployment", function() {
-        it("Only 1 token", async function () {
-            await nft.createRing();
-            total = nft.totalSupply();
-            expect(await total).to.equal(1);
-        });
-        it("Only one token in balance", async function () {
-            await nft.createRing();
-            expect(await nft.balanceOf(own.address)).to.equal(1);
-        });
-    })
-})
 
 // To use the NFT contract in the token contract, modify the constructor to get the sc address of NFT as argument.
 describe('Tax', function() {
@@ -61,3 +38,34 @@ describe('Tax', function() {
         })
     })
 });
+
+// To modify for new ruler contract
+describe('Ruler', function() {
+    beforeEach(async function() {
+        //NFT = await ethers.getContractAt("RING");
+        ringArtifact = await artifacts.readArtifact("RING");
+        ring = new ethers.Contract("RING", ringArtifact.abi,ethers.provider);
+        Ruler = await ethers.getContractFactory("Ruler");
+        //ring = await RING.deploy();
+        ruler = await Ruler.deploy(ring.address)
+        
+        let balance;
+        let total;
+        [own, add1, add2, ...addrs] = await ethers.getSigners();
+        
+        await nft.deployed;
+        await ruler.deployed;
+    });
+
+    describe("Deployment", function() {
+        it("Only 1 token", async function () {
+            //await nft.createRing();
+            total = ring.totalSupply();
+            expect(await total).to.equal(1);
+        });
+        it("Only one token in balance", async function () {
+            //await nft.createRing();
+            expect(await ring.balanceOf(own.address)).to.equal(1);
+        });
+    })
+})

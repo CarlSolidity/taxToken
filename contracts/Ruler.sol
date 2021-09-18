@@ -1311,7 +1311,7 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 }
 
-abstract contract NFT is ERC721Enumerable, Ownable {
+abstract contract RING is ERC721Enumerable, Ownable {
     uint256 public constant maxSupply = 1;
 
     /*constructor() ERC721("OneRing", "ONE") {
@@ -1331,7 +1331,7 @@ contract Ruler {
     using SafeMath for uint256;
 
     uint256 public price;
-    NFT public ring;
+    RING public ring;
 
     uint256 public totalCollected;
 
@@ -1339,7 +1339,7 @@ contract Ruler {
 
     constructor(address _ring) public {
         //require(init == false, "Ring already created");
-        ring = NFT(_ring);
+        ring = RING(_ring);
         ring.createRing();
     }
 }
