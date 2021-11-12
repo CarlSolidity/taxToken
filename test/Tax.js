@@ -39,33 +39,65 @@ describe('Tax', function() {
     })
 });
 
+describe('NFT', function() {
+    beforeEach(async function() {
+        NFT = await ethers.getContractFactory("NFT");
+        nft = await NFT.deploy();
+        await nft.deployed();
+    });
+
+    describe("Deployment", function() {
+        it("Should be the correct name", async function () {
+            expect(await nft.name()).to.equal("OneRing");
+        });
+
+        it("Should be the correct symbol", async function () {
+            expect(await nft.symbol()).to.equal("ONE");
+        })
+    });
+})
+
 // To modify for new ruler contract
 describe('Ruler', function() {
     beforeEach(async function() {
-        //NFT = await ethers.getContractAt("RING");
-        ringArtifact = await artifacts.readArtifact("RING");
-        ring = new ethers.Contract("RING", ringArtifact.abi,ethers.provider);
+        // let provider = ethers.getDefaultProvider();
+        // //NFT = await ethers.getContractAt("RING");
+        // ringArtifact = await artifacts.readArtifact("NFT");
+        // taxArtifact = await artifacts.readArtifact("Tax");
+        // _ring = new ethers.Contract("NFT", ringArtifact.abi, provider);
+        // rad = _ring.address;
+        // _tax = new ethers.Contract("Tax", taxArtifact.abi, provider)
+        Token = await ethers.getContractFactory("Tax");
+        tax = await Token.deploy(2, 3);
+        await tax.deployed();
+
+        NFT = await ethers.getContractFactory("NFT");
+        nft = await NFT.deploy();
+        await nft.deployed();
+
         Ruler = await ethers.getContractFactory("Ruler");
-        //ring = await RING.deploy();
-        ruler = await Ruler.deploy(ring.address)
+        //ring = await _ring.deployed();
+        console.log("Ring address is: %s", nft.address);
+        ruler = await Ruler.deploy(nft.address, tax.address);
         
         let balance;
         let total;
         [own, add1, add2, ...addrs] = await ethers.getSigners();
         
-        await nft.deployed;
-        await ruler.deployed;
     });
 
     describe("Deployment", function() {
         it("Only 1 token", async function () {
-            //await nft.createRing();
-            total = ring.totalSupply();
-            expect(await total).to.equal(1);
+            await nft.createRing();
+            total = nft.maxSupply();
+            console.log("total is: %s", total);
+            //expect(await total).to.equal(1);
         });
         it("Only one token in balance", async function () {
-            //await nft.createRing();
-            expect(await ring.balanceOf(own.address)).to.equal(1);
+            await nft.createRing();
+            balance = await nft.balanceOf(own.address);
+            //console.log("balance of owner is: %s", balance);
+            expect(await nft.balanceOf(own.address)).to.equal(1);
         });
     })
 })

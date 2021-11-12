@@ -1,0 +1,12 @@
+Ruler:
+
+add bytes code for interface
+
+call tax token contract
+
+call NFT contract and run setup, 1 nft max.
+
+Have price "auction", use taxtoken to pay only, double price when bought, decay price after a while   
+(https://etherscan.io/address/0xf779cae120093807985d5f2e7dbb21d69be6b963#code line 190)
+
+Time period blocked: 12h?
